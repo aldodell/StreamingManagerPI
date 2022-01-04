@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">StreamingManagerPI</string>
+    <string name="order_by">Ordenar por</string>
+    <string name="name">Nombre</string>
+    <string name="expiration_date">fecha de vencimiento</string>
+</resources>

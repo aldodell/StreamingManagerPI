@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "618734990186",
+    "project_id": "streamingmanagerpi",
+    "storage_bucket": "streamingmanagerpi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618734990186:android:79c824381c0e4494b66b13",
+        "android_client_info": {
+          "package_name": "com.psiqueylogos_ac.streamingmanagerpi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "618734990186-on016mlg9it0tc7eiuv3eq6srlu2ptrr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.psiqueylogos_ac.streamingmanagerpi",
+            "certificate_hash": "8cb7a84c403d2094b870e6fe19edbda24bd255f5"
+          }
+        },
+        {
+          "client_id": "618734990186-lbu0otkt77m5rijbqtkqibqralhn42jq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCktVIZ-NP1WuMEF-iQsbPb1PXJHw3Pd2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "618734990186-lbu0otkt77m5rijbqtkqibqralhn42jq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
