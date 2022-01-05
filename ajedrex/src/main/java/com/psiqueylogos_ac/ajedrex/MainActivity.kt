@@ -9,8 +9,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        data class Person(var name : String ="" ) : Record
-        data class Car(var brand:String="", var color: String="") : Record
+        data class Person(var name : String ="" ) : Record ()
+        data class Car(var brand:String="", var color: String="") : Record()
 
 
      var filename = this.getDatabasePath("andreina.json").path

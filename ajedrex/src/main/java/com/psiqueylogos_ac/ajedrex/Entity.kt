@@ -14,7 +14,7 @@ open class Entity<T : Record> : MutableCollection<T> {
 
     private val records = ArrayList<T>()
     private var recordType: KClass<T>
-    private var lastIndex = 0
+    private var lastIndex = 1
 
     constructor(record: KClass<T>) {
         recordType = record
@@ -47,16 +47,20 @@ open class Entity<T : Record> : MutableCollection<T> {
     }
 
     fun load(path: String, clear: Boolean = true) {
-        val f = File(path)
-        val s = f.readText()
         if (clear) records.clear()
-        fill(JSONArray(s))
+        val f = File(path)
+        if(f.exists()) {
+            val s = f.readText()
+            fill(JSONArray(s))
+            calculateIndex()
+        }
     }
 
 
     fun calculateIndex(): Int {
         var i = 0
         records.forEach { if (it._ID > i) i = it._ID }
+        lastIndex = i  + 1
         return i
     }
 
@@ -82,7 +86,7 @@ open class Entity<T : Record> : MutableCollection<T> {
     override fun add(element: T): Boolean {
         element._ID = lastIndex
         records.add(element)
-        lastIndex++
+        lastIndex += 1
         return true
     }
 
@@ -93,7 +97,7 @@ open class Entity<T : Record> : MutableCollection<T> {
 
     override fun clear() {
         records.clear()
-        lastIndex = 0
+        lastIndex = 1
     }
 
     override fun iterator(): MutableIterator<T> = records.iterator()

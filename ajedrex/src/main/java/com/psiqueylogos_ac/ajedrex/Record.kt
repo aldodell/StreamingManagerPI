@@ -9,10 +9,10 @@ import kotlin.reflect.full.*
 annotation class Ignore
 annotation class PrimaryKey
 
-interface  Record {
+open class  Record {
 
     @PrimaryKey
-    var _ID : Int
+    open var _ID : Int = -1
 
     /**
      * Fill this record object with data from jsonObject

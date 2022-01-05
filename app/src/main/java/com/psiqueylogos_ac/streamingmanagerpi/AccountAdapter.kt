@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 
-class AccountAdapter(var accounts: List<Account>) : RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
+class AccountAdapter(var accounts: List<Account2>) : RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val name : Button = itemView.findViewById(R.id.client_row_name)
@@ -52,7 +52,7 @@ class AccountAdapter(var accounts: List<Account>) : RecyclerView.Adapter<Account
 
         holder.name.setOnClickListener {
             val myIntent = Intent(it.context, ClientEditorActivity::class.java)
-            myIntent.putExtra("id", account.id)
+            myIntent.putExtra("id", account._ID)
             myIntent.flags += FLAG_ACTIVITY_NEW_TASK
             it.context.startActivity(myIntent)
         }

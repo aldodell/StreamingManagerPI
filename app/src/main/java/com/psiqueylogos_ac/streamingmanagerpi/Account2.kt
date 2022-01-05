@@ -5,7 +5,7 @@ import com.psiqueylogos_ac.ajedrex.Entity
 import com.psiqueylogos_ac.ajedrex.Record
 
 data class Account2  (
-    var id : Int = 0,
+    override var _ID : Int = 0,
     var name : String="",
     var identifier : String="",
     var key: String="",
@@ -16,4 +16,4 @@ data class Account2  (
     var email : String="",
     var platform : String=""
 
-) : Record
+) : Record()

@@ -11,6 +11,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.psiqueylogos_ac.ajedrex.Entity
 import java.text.SimpleDateFormat
 
 class ChooseAccountActivity : AppCompatActivity() {
@@ -19,6 +20,7 @@ class ChooseAccountActivity : AppCompatActivity() {
     lateinit var sortByNameButton : Button
     lateinit var sortByExpirationDate : Button
     private lateinit var auth: FirebaseAuth
+    var db = Entity(Account2::class)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +37,6 @@ class ChooseAccountActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this.baseContext)
         floatingActionButton = findViewById(R.id.floatingActionButton)
 
-
         sortByNameButton.setOnClickListener {
             orderByName()
         }
@@ -43,8 +44,6 @@ class ChooseAccountActivity : AppCompatActivity() {
         sortByExpirationDate.setOnClickListener {
             orderByExpirationDate()
         }
-
-
 
         floatingActionButton.setOnClickListener {
 
@@ -57,29 +56,17 @@ class ChooseAccountActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        db.load(databaFilename)
         orderByName()
-
     }
 
     fun orderByName() {
-        val db = Room
-            .databaseBuilder(this.baseContext, AppDatabase::class.java, "Account")
-            .allowMainThreadQueries()
-            .build()
-        val accounts = db.accountDao().getAllByName()
-        recyclerView.adapter = AccountAdapter(accounts)
+        recyclerView.adapter = AccountAdapter(db.sortedBy { it.name })
     }
 
     fun orderByExpirationDate() {
         val sfd = SimpleDateFormat("dd/MM/yyyy")
-        val db = Room
-            .databaseBuilder(this.baseContext, AppDatabase::class.java, "Account")
-            .allowMainThreadQueries()
-            .build()
-        val accounts = db.accountDao().getAllByName()
-
-        val sorted =  accounts.sortedBy { sfd.parse(it.expirationDate).time }
-
+        val sorted =  db.sortedBy { sfd.parse(it.expirationDate).time }
         recyclerView.adapter = AccountAdapter(sorted)
     }
 }
