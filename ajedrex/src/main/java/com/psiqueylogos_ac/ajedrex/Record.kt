@@ -7,8 +7,12 @@ import kotlin.reflect.full.*
 
 
 annotation class Ignore
+annotation class PrimaryKey
 
 interface  Record {
+
+    @PrimaryKey
+    var _ID : Int
 
     /**
      * Fill this record object with data from jsonObject
@@ -18,7 +22,7 @@ interface  Record {
                 p->
 
             if(p.hasAnnotation<Ignore>()) {
-            //Ignore this loop
+                //Ignore this loop
             } else  if(p.returnType.isSubtypeOf(Record::class.createType())) {
                 val q = p as KMutableProperty1<Record, Record>
                 val r = q.get(this)

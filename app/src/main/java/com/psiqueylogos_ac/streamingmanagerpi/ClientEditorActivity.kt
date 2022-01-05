@@ -9,6 +9,7 @@ import android.widget.EditText
 import androidx.room.Room
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.psiqueylogos_ac.ajedrex.Entity
 import java.text.SimpleDateFormat
 
 
@@ -46,6 +47,8 @@ class ClientEditorActivity : AppCompatActivity() {
         phone = findViewById(R.id.client_phone)
         days30 = findViewById(R.id.client_30_days)
 
+
+        /*
         //Database reference
         val db = Room
             .databaseBuilder(this.baseContext, AppDatabase::class.java, "Account")
@@ -56,10 +59,17 @@ class ClientEditorActivity : AppCompatActivity() {
             val account = db.accountDao().getById(theId)
             setUi(account)
         }
+*/
+
+        var db = Entity (Account2::class)
+        if(theId > -1) {
+            setUi(db.first { it.id == theId })
+        }
 
         saveButton.setOnClickListener {
 
             val account = getUi()
+            db.update(account){it.id==account.id}
 
             if(theId > -1 ) {
                 db.accountDao().update(account)
@@ -93,11 +103,11 @@ class ClientEditorActivity : AppCompatActivity() {
     }
 
 
-    fun getUi(mId: Int? = null) : Account{
-        var myId : Int? = null
+    fun getUi(mId: Int? = null) : Account2{
+        var myId : Int = -1
         if(theId >= 0 ) myId = theId
 
-        return Account(
+        return Account2(
             myId,
             name.text.toString(),
             identifier.text.toString(),
@@ -112,7 +122,7 @@ class ClientEditorActivity : AppCompatActivity() {
         )
     }
 
-    fun setUi(account: Account) {
+    fun setUi(account: Account2) {
         theId = account.id ?: -1
         name.setText(account.name)
         identifier.setText(account.identifier)
